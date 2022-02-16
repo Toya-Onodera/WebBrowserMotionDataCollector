@@ -1,0 +1,2 @@
+# WebBrowserMotionDataCollector
+ブラウザで取得できるセンサ値を Firebase に格納するアプリケーション
