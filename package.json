@@ -29,9 +29,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
     "lint": "eslint --ext .jsx,.js,.tsx,.ts src/",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "lint:style": "stylelint '**/*.{css,scss,sass}'",
+    "lint:style:fix": "stylelint --fix '**/*.{css,scss,sass}'",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -64,12 +67,18 @@
     "postcss-loader": "^6.2.1",
     "prettier": "^2.5.1",
     "style-loader": "^3.3.1",
+    "stylelint": "^14.5.0",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-order": "^5.0.0",
     "svg-inline-loader": "^0.8.2"
   },
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx}": [
       "eslint --fix",
       "prettier --write"
+    ],
+    "**/*.{css,scss,sass}": [
+      "stylelint --fix"
     ]
   }
 }
