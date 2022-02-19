@@ -8,6 +8,7 @@
 // You can read more here:
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
+import { addMatchImageSnapshotPlugin } from "cypress-image-snapshot/plugin";
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
@@ -16,9 +17,15 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-const plugins = () => {
+const plugins = (
+  on: Cypress.PluginEvents,
+  config: Cypress.PluginConfigOptions,
+): Cypress.PluginConfigOptions => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-}
+
+  addMatchImageSnapshotPlugin(on, config);
+  return config;
+};
 
 export default plugins;
