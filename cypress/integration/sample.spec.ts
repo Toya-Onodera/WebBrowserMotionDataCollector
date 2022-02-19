@@ -8,6 +8,6 @@ describe("Check text", () => {
     cy.contains("code", "src/App.tsx");
 
     // スナップショットテスト
-    cy.matchImageSnapshot("test");
+    // cy.matchImageSnapshot("test");
   });
 });
