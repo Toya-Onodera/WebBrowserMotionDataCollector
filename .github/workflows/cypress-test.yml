@@ -1,0 +1,40 @@
+name: Cypress Test
+on: [ push, pull_request ]
+
+jobs:
+  job_1:
+    name: e2e-with-cypress
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:latest
+      options: --user 1001 # Firefox で動作確認するための設定
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+      - name: Install cypress dependencies
+        run: yarn --frozen-lockfile
+        working-directory: cypress
+
+      ##############################
+      # Google Chrome
+      ##############################
+      - name: E2E with Google Chrome
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          start: yarn start
+          wait-on: "https://localhost:8080"
+          command: yarn cy:run:chrome
+
+      ##############################
+      # Firefox
+      ##############################
+      - name: E2E with Firefox
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          start: yarn start
+          wait-on: "https://localhost:8080"
+          command: yarn cy:run:firefox
