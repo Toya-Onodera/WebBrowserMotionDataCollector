@@ -37,6 +37,8 @@ jobs:
           start: yarn start
           wait-on: "https://localhost:8080"
           command: yarn cy:run:chrome
+        env:
+          NODE_TLS_REJECT_UNAUTHORIZED: 0
 
       ##############################
       # Firefox
@@ -48,3 +50,5 @@ jobs:
           start: yarn start
           wait-on: "https://localhost:8080"
           command: yarn cy:run:firefox
+        env:
+          NODE_TLS_REJECT_UNAUTHORIZED: 0

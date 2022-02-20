@@ -56,6 +56,7 @@
   },
   "scripts": {
     "start": "HTTPS=true PORT=8080 react-scripts -r @cypress/instrument-cra start",
+    "start:ci": "PORT=8080 react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -69,8 +70,8 @@
     "cy:run": "cross-env NODE_PATH=src cypress run --headless --env failOnSnapshotDiff=false",
     "cy:snap": "cross-env NODE_PATH=src cypress run --headless",
     "cy:snap:update": "cross-env NODE_PATH=src cypress run --headless --env updateSnapshots=true",
-    "cy:run:chrome": "cross-env run --browser chrome",
-    "cy:run:firefox": "cross-env run --browser firefox",
+    "cy:run:chrome": "cross-env NODE_PATH=src cypress run --headless --browser chrome --env failOnSnapshotDiff=false",
+    "cy:run:firefox": "cross-env NODE_PATH=src cypress run --headless --browser firefox --env failOnSnapshotDiff=false",
     "prepare": "husky install"
   },
   "nyc": {
