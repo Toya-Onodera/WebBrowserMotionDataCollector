@@ -1,5 +1,5 @@
 import React from "react";
-import tw, { styled } from "twin.macro";
+import styled from "styled-components";
 
 // atoms
 import { Image, ImageProps } from "../../atoms/Image";
@@ -12,5 +12,4 @@ export const Snap: React.VFC<ImageProps> = ({ src }) => {
   );
 };
 
-// ${tw`snap-center`}
 const Wrapper = styled.div``;

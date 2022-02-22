@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "twin.macro";
+import styled from "styled-components";
 
 // component
 import { ScrollableSnap } from "../../organisms/ScrollableSnap";

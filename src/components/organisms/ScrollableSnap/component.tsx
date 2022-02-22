@@ -1,5 +1,5 @@
 import React from "react";
-import tw, { styled } from "twin.macro";
+import styled from "styled-components";
 
 // molecules
 import { Snap } from "../../molecules/Snap";
@@ -17,5 +17,4 @@ export const ScrollableSnap: React.VFC<Props> = ({ sources }) => {
   );
 };
 
-// ${tw`snap-x`}
 const Wrapper = styled.div``;
