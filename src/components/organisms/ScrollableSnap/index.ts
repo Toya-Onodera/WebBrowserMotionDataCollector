@@ -1,0 +1,1 @@
+export { ScrollableSnap } from "./component";

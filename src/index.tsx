@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
+import { IndexPage } from "./components/pages/Index";
 
 ReactDOM.render(
   <React.StrictMode>
+    <IndexPage />
   </React.StrictMode>,
   document.getElementById("root"),
 );
