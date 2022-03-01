@@ -3,6 +3,7 @@ module.exports = {
   entry: "./index.tsx",
   devtool: "inline-source-map",
   mode: "development",
+  target: "web",
   module: {
     rules: [
       {
