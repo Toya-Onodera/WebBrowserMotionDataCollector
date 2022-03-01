@@ -73,10 +73,35 @@ export const IndexPage: React.VFC = () => {
   );
 };
 
-const Wrapper = styled.div``;
-const Article = styled.article``;
+const Wrapper = styled.div`
+  padding: 16px;
+`;
+
+const Article = styled.article`
+  padding: 16px;
+  background-color: #fafafa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+`;
+
 const Section = styled.section``;
-const H2 = styled.h2``;
-const H3 = styled.h3``;
+
+const H2 = styled.h2`
+  padding: 16px;
+  margin-bottom: 16px;
+  font-weight: bold;
+  font-size: 24px;
+  border-left: 4px solid #424242;
+`;
+
+const H3 = styled.h3`
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-weight: bold;
+`;
+
 const List = styled.ul``;
-const ListChildren = styled.li``;
+
+const ListChildren = styled.li`
+  margin-top: 12px;
+  margin-bottom: 12px;
+`;
