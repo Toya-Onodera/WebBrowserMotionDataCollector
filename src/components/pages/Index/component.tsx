@@ -6,6 +6,7 @@ import { CardArticle } from "../../molecules/CardArticle";
 import { Section } from "../../molecules/Section";
 import { List } from "../../molecules/Lists";
 import { FloatingInfo } from "../../atoms/FloatingInfo";
+import { FloatingButton } from "../../atoms/FloatingButton";
 
 // hooks
 import { useIndexHooks } from "./hooks";
