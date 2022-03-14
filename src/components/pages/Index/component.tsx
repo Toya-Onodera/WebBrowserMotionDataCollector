@@ -60,4 +60,8 @@ export const IndexPage: React.VFC = () => {
 
 const Wrapper = styled.div`
   padding: 16px;
+
+  & > article:not(:first-child) {
+    margin-top: 24px;
+  }
 `;
