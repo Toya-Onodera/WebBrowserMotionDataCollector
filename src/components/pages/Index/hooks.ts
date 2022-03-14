@@ -51,5 +51,6 @@ export const useIndexHooks = () => {
     deviceUseLists,
     rotationRateLists,
     isSensorUse,
+    setIsSensorUse,
   };
 };

@@ -6,7 +6,7 @@ import { CardArticle } from "../../molecules/CardArticle";
 import { Section } from "../../molecules/Section";
 import { List } from "../../molecules/Lists";
 import { FloatingInfo } from "../../atoms/FloatingInfo";
-import { FloatingButton } from "../../atoms/FloatingButton";
+import { MotionSensorFloatingButton } from "../../organisms/MotionSensorFloatingButton/component";
 
 // hooks
 import { useIndexHooks } from "./hooks";
@@ -19,6 +19,7 @@ export const IndexPage: React.VFC = () => {
     deviceUseLists,
     rotationRateLists,
     isSensorUse,
+    setIsSensorUse,
   } = useIndexHooks();
 
   return (
@@ -48,6 +49,11 @@ export const IndexPage: React.VFC = () => {
       </Wrapper>
 
       {isSensorUse && <FloatingInfo text="実行中" />}
+
+      <MotionSensorFloatingButton
+        isSensorUse={isSensorUse}
+        setIsSensorUse={setIsSensorUse}
+      />
     </>
   );
 };

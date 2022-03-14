@@ -1,24 +1,24 @@
 import React from "react";
-import styled from "styled-components";
 
-// FontAwesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { Fab } from "@mui/material";
+import { SvgIconComponent } from "@mui/icons-material";
 
 type Props = {
-  icon: IconProp;
+  icon: SvgIconComponent;
+  onClick: () => void;
 };
 
-export const FloatingButton: React.VFC<Props> = ({ icon }) => (
-  <Wrapper>
-    <FontAwesomeIcon icon={icon} />
-  </Wrapper>
+export const FloatingButton: React.VFC<Props> = ({ icon: Icon, onClick }) => (
+  <Fab
+    color="primary"
+    sx={{
+      position: "fixed",
+      padding: "24px",
+      bottom: "16px",
+      right: "16px",
+    }}
+    onClick={onClick}
+  >
+    <Icon />
+  </Fab>
 );
-
-const Wrapper = styled.div`
-  position: fixed;
-  padding: 24px;
-  bottom: 16px;
-  right: 16px;
-  background-color: #4299e1;
-`;
