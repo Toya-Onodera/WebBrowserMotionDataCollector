@@ -2,10 +2,11 @@
 ブラウザで取得できるセンサ値を Firebase に格納するアプリケーション
 
 ### 動作までの流れ
-※ `yarn` 推奨です！
-1. yarn
-2. yarn prepare
-3. yarn start
+※ `yarn` インストール済みで進めます    
+1. `echo "FAST_REFRESH=false" > .env` (ホームディレクトリ)
+2. yarn
+3. yarn prepare
+4. yarn start
 
 ### 主要なコマンド
 | できること              | コマンド             |

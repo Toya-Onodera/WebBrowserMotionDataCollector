@@ -1,1 +1,0 @@
-export { Snap } from "./component";
