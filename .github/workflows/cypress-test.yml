@@ -1,5 +1,14 @@
 name: Cypress Test
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
   job_1:
