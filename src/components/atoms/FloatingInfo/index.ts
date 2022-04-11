@@ -1,1 +1,1 @@
-export { FloatingInfo } from "./component";
+export { FloatingInfo } from "./FloatingInfo";

@@ -1,1 +1,1 @@
-export { FloatingButton } from "./component";
+export { FloatingButton } from "./FloatingButton";

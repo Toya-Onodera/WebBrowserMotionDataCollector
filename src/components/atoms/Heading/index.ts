@@ -1,1 +1,1 @@
-export { H2, H3 } from "./component";
+export { H2, H3 } from "./Heading";

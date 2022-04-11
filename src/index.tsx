@@ -4,7 +4,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import reportWebVitals from "./reportWebVitals";
 
-import { IndexPage } from "./components/pages/Index";
+import { IndexPage } from "./components/pages/IndexPage";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
