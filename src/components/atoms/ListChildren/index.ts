@@ -1,1 +1,1 @@
-export { ListChildren } from "./components";
+export { ListChildren } from "./ListChildren";
