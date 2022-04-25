@@ -2332,6 +2332,11 @@
   dependencies:
     "@types/jest" "*"
 
+"@types/tingle.js@^0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@types/tingle.js/-/tingle.js-0.13.2.tgz#4fdb640b05f6ab33757597ac8c0a98fe3126fdd8"
+  integrity sha512-Rv1x+xN/5A9/6d56gkMpReAEAic2vHTV1AzkLbCHkR4aC+vzbfxAHwsoFemrBmvPaBW2Oo6tQppZ0NmLM7PkKA==
+
 "@types/trusted-types@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@types/trusted-types/-/trusted-types-2.0.2.tgz#fc25ad9943bcac11cceb8168db4f275e0e72e756"
@@ -11008,6 +11013,11 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tingle.js@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/tingle.js/-/tingle.js-0.16.0.tgz#1ac35f91315271c47cb6bb7299d0b327ac7539ea"
+  integrity sha512-xV4F2j7+QMxDfzuX59KhxiWKeAgI/QSC8o7k9rQu8hZD8TZefMTViq7l07DIcVDb30IlAPlyFRs6SnD1Fup6hA==
 
 tmp@~0.2.1:
   version "0.2.1"
