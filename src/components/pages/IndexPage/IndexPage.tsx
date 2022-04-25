@@ -10,26 +10,12 @@ import { MobileSensorData } from "../../organisms/MobileSensorData";
 import { useIndexHooks } from "./IndexPage.hooks";
 
 export const IndexPage: React.VFC = () => {
-  const {
-    accelerationIncludingGravityLists,
-    accelerationLists,
-    deviceorientationLists,
-    deviceUseLists,
-    rotationRateLists,
-    isSensorUse,
-    setIsSensorUse,
-  } = useIndexHooks();
+  const { isSensorUse, setIsSensorUse } = useIndexHooks();
 
   return (
     <>
       <Wrapper>
-        <MobileSensorData
-          accelerationIncludingGravityLists={accelerationIncludingGravityLists}
-          accelerationLists={accelerationLists}
-          deviceorientationLists={deviceorientationLists}
-          deviceUseLists={deviceUseLists}
-          rotationRateLists={rotationRateLists}
-        />
+        <MobileSensorData />
       </Wrapper>
 
       {isSensorUse && <FloatingInfo text="実行中" />}
