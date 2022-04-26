@@ -1,0 +1,1 @@
+export { IOSPermissionsCheckModal } from "./IOSPermissionsCheckModal";
