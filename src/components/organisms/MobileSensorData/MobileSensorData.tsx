@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // Components
 import { CardArticle } from "../../molecules/CardArticle";
@@ -9,14 +9,19 @@ import { IOSPermissionsCheckModal } from "../IOSPermissionsCheckModal";
 // Hooks
 import { useMobileSensorData } from "./MobileSensorData.hooks";
 
+// Contexts
+import { MobileSensorContext } from "../../templates/MobileSensorContext";
+
 export const MobileSensorData: React.VFC = () => {
+  const mobileSensorContext = useContext(MobileSensorContext);
+
   const {
     deviceUseLists,
     deviceorientationLists,
     accelerationLists,
     accelerationIncludingGravityLists,
     rotationRateLists,
-  } = useMobileSensorData();
+  } = useMobileSensorData(mobileSensorContext);
 
   return (
     <>

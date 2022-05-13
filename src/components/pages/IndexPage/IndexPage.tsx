@@ -9,11 +9,14 @@ import { MobileSensorData } from "../../organisms/MobileSensorData";
 // hooks
 import { useIndexHooks } from "./IndexPage.hooks";
 
+// Context
+import { MobileSensorContextProvider } from "../../templates/MobileSensorContext";
+
 export const IndexPage: React.VFC = () => {
   const { isSensorUse, setIsSensorUse } = useIndexHooks();
 
   return (
-    <>
+    <MobileSensorContextProvider>
       <Wrapper>
         <MobileSensorData />
       </Wrapper>
@@ -24,7 +27,7 @@ export const IndexPage: React.VFC = () => {
         isSensorUse={isSensorUse}
         setIsSensorUse={setIsSensorUse}
       />
-    </>
+    </MobileSensorContextProvider>
   );
 };
 
