@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { MobileSensorContextValue } from "../../templates/MobileSensorContext";
 
-export const useMobileSensorData = (
+export const useMobileSensorDataLists = (
   mobileSensorContext: MobileSensorContextValue,
 ) => {
   const {

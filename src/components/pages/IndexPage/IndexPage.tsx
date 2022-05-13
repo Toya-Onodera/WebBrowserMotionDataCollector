@@ -4,7 +4,7 @@ import styled from "styled-components";
 // component
 import { FloatingInfo } from "../../atoms/FloatingInfo";
 import { MotionSensorFloatingButton } from "../../organisms/MotionSensorFloatingButton";
-import { MobileSensorData } from "../../organisms/MobileSensorData";
+import { MobileSensorDataLists } from "../../organisms/MobileSensorDataLists";
 
 // hooks
 import { useIndexHooks } from "./IndexPage.hooks";
@@ -18,7 +18,7 @@ export const IndexPage: React.VFC = () => {
   return (
     <MobileSensorContextProvider>
       <Wrapper>
-        <MobileSensorData />
+        <MobileSensorDataLists />
       </Wrapper>
 
       {isSensorUse && <FloatingInfo text="実行中" />}

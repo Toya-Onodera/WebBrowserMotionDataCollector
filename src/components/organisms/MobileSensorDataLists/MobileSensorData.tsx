@@ -7,12 +7,12 @@ import { List } from "../../molecules/Lists";
 import { IOSPermissionsCheckModal } from "../IOSPermissionsCheckModal";
 
 // Hooks
-import { useMobileSensorData } from "./MobileSensorData.hooks";
+import { useMobileSensorDataLists } from "./MobileSensorData.hooks";
 
 // Contexts
 import { MobileSensorContext } from "../../templates/MobileSensorContext";
 
-export const MobileSensorData: React.VFC = () => {
+export const MobileSensorDataLists: React.VFC = () => {
   const mobileSensorContext = useContext(MobileSensorContext);
 
   const {
@@ -21,7 +21,7 @@ export const MobileSensorData: React.VFC = () => {
     accelerationLists,
     accelerationIncludingGravityLists,
     rotationRateLists,
-  } = useMobileSensorData(mobileSensorContext);
+  } = useMobileSensorDataLists(mobileSensorContext);
 
   return (
     <>
