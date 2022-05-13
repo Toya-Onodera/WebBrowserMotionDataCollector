@@ -17,9 +17,9 @@ export const IndexPage: React.VFC = () => {
 
   return (
     <MobileSensorContextProvider>
-      <Wrapper>
+      <ListStyleWrapper>
         <MobileSensorDataLists />
-      </Wrapper>
+      </ListStyleWrapper>
 
       {isSensorUse && <FloatingInfo text="実行中" />}
 
@@ -31,7 +31,7 @@ export const IndexPage: React.VFC = () => {
   );
 };
 
-const Wrapper = styled.div`
+const ListStyleWrapper = styled.div`
   padding: 16px;
 
   & > article:not(:first-child) {
