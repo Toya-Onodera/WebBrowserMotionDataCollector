@@ -1,9 +1,16 @@
 import React, { createContext, useEffect, useState } from "react";
 
-type Orientation = DeviceOrientationEvent | null;
-type Acceleration = DeviceMotionEventAcceleration | null;
-type AccelerationIncludingGravity = DeviceMotionEventAcceleration | null;
-type RotationRate = DeviceMotionEventRotationRate | null;
+// DeviceOrientationEvent だと余計なプロパティも取り扱ってしまう
+export type Orientation = {
+  absolute: boolean;
+  alpha: number | null;
+  beta: number | null;
+  gamma: number | null;
+} | null;
+
+export type Acceleration = DeviceMotionEventAcceleration | null;
+export type AccelerationIncludingGravity = DeviceMotionEventAcceleration | null;
+export type RotationRate = DeviceMotionEventRotationRate | null;
 
 export type MobileSensorContextValue = {
   orientation: Orientation;
@@ -24,8 +31,18 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
   const [rotationRate, setRotationRate] = useState<RotationRate>(null);
 
   useEffect(() => {
-    const orientationHandler = (orientation: DeviceOrientationEvent) => {
-      setDeviceOrientation(orientation);
+    const orientationHandler = ({
+      absolute,
+      alpha,
+      beta,
+      gamma,
+    }: DeviceOrientationEvent) => {
+      setDeviceOrientation({
+        absolute,
+        alpha,
+        beta,
+        gamma,
+      });
     };
 
     const motionHandler = ({
