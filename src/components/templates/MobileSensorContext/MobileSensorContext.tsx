@@ -32,7 +32,7 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const orientationHandler = ({
-      absolute,
+      absolute = false, // Webkit(Safari) では undefined 扱いになるのを防ぐ
       alpha,
       beta,
       gamma,
