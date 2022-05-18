@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { isIOS } from "react-device-detect";
 
 // DeviceOrientationEvent だと余計なプロパティも取り扱ってしまう
 export type Orientation = {
@@ -22,6 +23,26 @@ export type MobileSensorContextValue = {
 export const MobileSensorContext = createContext<MobileSensorContextValue>(
   {} as MobileSensorContextValue,
 );
+
+// Android と iOS でセンサ値が違うので補正をかける
+// 向きを Android に合わせる
+// https://misohena.jp/blog/2014-10-28-js_deviceorientation.html
+const sensorAccelerationValueAboutOsBetweenDifferenceAbsorb = (
+  sensorData: DeviceMotionEventAcceleration,
+) => {
+  if (sensorData.x && sensorData.y && sensorData.z && isIOS) {
+    const { x, y, z } = sensorData;
+    const [correctionX, correctionY, correctionZ] = [-x, -y, -z];
+
+    return {
+      x: correctionX,
+      y: correctionY,
+      z: correctionZ,
+    } as DeviceMotionEventAcceleration;
+  }
+
+  return sensorData;
+};
 
 export const MobileSensorContextProvider: React.FC = ({ children }) => {
   const [orientation, setDeviceOrientation] = useState<Orientation>(null);
@@ -51,12 +72,18 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
       rotationRate,
     }: DeviceMotionEvent) => {
       if (acceleration) {
-        const { x, y, z } = acceleration;
+        const { x, y, z } =
+          sensorAccelerationValueAboutOsBetweenDifferenceAbsorb(acceleration);
+
         setAcceleration({ x, y, z });
       }
 
       if (accelerationIncludingGravity) {
-        const { x, y, z } = accelerationIncludingGravity;
+        const { x, y, z } =
+          sensorAccelerationValueAboutOsBetweenDifferenceAbsorb(
+            accelerationIncludingGravity,
+          );
+
         setAccelerationIncludingGravity({ x, y, z });
       }
 
