@@ -50,9 +50,20 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
       accelerationIncludingGravity,
       rotationRate,
     }: DeviceMotionEvent) => {
-      setAcceleration(acceleration);
-      setAccelerationIncludingGravity(accelerationIncludingGravity);
-      setRotationRate(rotationRate);
+      if (acceleration) {
+        const { x, y, z } = acceleration;
+        setAcceleration({ x, y, z });
+      }
+
+      if (accelerationIncludingGravity) {
+        const { x, y, z } = accelerationIncludingGravity;
+        setAccelerationIncludingGravity({ x, y, z });
+      }
+
+      if (rotationRate) {
+        const { alpha, beta, gamma } = rotationRate;
+        setRotationRate({ alpha, beta, gamma });
+      }
     };
 
     window.addEventListener("devicemotion", motionHandler);
