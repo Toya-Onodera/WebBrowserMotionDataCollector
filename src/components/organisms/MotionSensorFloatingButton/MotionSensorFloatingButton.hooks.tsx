@@ -13,6 +13,7 @@ import {
   Acceleration,
   AccelerationIncludingGravity,
   MobileSensorContext,
+  MobileSensorContextValue,
   Orientation,
   RotationRate,
 } from "../../templates/MobileSensorContext";
@@ -38,14 +39,18 @@ const SENSOR_INITIALIZE_VALUE = {
   rotationRate: [],
 };
 
-// stop の動作も組み込んだ setInterval
+// stop の動作も組み込んだ setInterval、センサ値の Context にも対応
 // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-const useInterval = (callback: () => void, delay: number | null) => {
+const useInterval = (
+  callback: () => void,
+  delay: number | null,
+  context?: MobileSensorContextValue,
+) => {
   const savedCallback = useRef(callback);
 
   useEffect(() => {
     savedCallback.current = callback;
-  }, [callback]);
+  }, [callback, context]);
 
   useEffect(() => {
     function tick() {
@@ -126,6 +131,7 @@ export const useMotionSensorFloatingButton = (
       });
     },
     isTimerStart ? 1000 : null,
+    mobileContext,
   );
 
   return {
