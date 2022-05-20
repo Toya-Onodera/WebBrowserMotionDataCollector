@@ -1,35 +1,17 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
+import { MobileSensorContextValue } from "../../templates/MobileSensorContext";
 
-type Orientation = DeviceOrientationEvent | null;
-type Acceleration = DeviceMotionEventAcceleration | null;
-type AccelerationIncludingGravity = DeviceMotionEventAcceleration | null;
-type RotationRate = DeviceMotionEventRotationRate | null;
-
-export const useMobileSensorData = () => {
-  const [orientation, setDeviceOrientation] = useState<Orientation>(null);
-  const [acceleration, setAcceleration] = useState<Acceleration>(null);
-  const [accelerationIncludingGravity, setAccelerationIncludingGravity] =
-    useState<AccelerationIncludingGravity>(null);
-  const [rotationRate, setRotationRate] = useState<RotationRate>(null);
-
-  useEffect(() => {
-    const orientationHandler = (orientation: DeviceOrientationEvent) => {
-      setDeviceOrientation(orientation);
-    };
-
-    const motionHandler = ({
-      acceleration,
-      accelerationIncludingGravity,
-      rotationRate,
-    }: DeviceMotionEvent) => {
-      setAcceleration(acceleration);
-      setAccelerationIncludingGravity(accelerationIncludingGravity);
-      setRotationRate(rotationRate);
-    };
-
-    window.addEventListener("devicemotion", motionHandler);
-    window.addEventListener("deviceorientation", orientationHandler);
-  }, []);
+export const useMobileSensorDataLists = (
+  mobileSensorContext: MobileSensorContextValue,
+) => {
+  const {
+    orientation,
+    acceleration,
+    accelerationIncludingGravity,
+    rotationRate,
+  } = useMemo(() => {
+    return mobileSensorContext;
+  }, [mobileSensorContext]);
 
   const deviceUseLists = useMemo(() => {
     return [

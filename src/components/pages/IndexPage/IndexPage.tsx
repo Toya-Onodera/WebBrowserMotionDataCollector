@@ -4,19 +4,22 @@ import styled from "styled-components";
 // component
 import { FloatingInfo } from "../../atoms/FloatingInfo";
 import { MotionSensorFloatingButton } from "../../organisms/MotionSensorFloatingButton";
-import { MobileSensorData } from "../../organisms/MobileSensorData";
+import { MobileSensorDataLists } from "../../organisms/MobileSensorDataLists";
 
 // hooks
 import { useIndexHooks } from "./IndexPage.hooks";
+
+// Context
+import { MobileSensorContextProvider } from "../../templates/MobileSensorContext";
 
 export const IndexPage: React.VFC = () => {
   const { isSensorUse, setIsSensorUse } = useIndexHooks();
 
   return (
-    <>
-      <Wrapper>
-        <MobileSensorData />
-      </Wrapper>
+    <MobileSensorContextProvider>
+      <ListStyleWrapper>
+        <MobileSensorDataLists />
+      </ListStyleWrapper>
 
       {isSensorUse && <FloatingInfo text="実行中" />}
 
@@ -24,11 +27,11 @@ export const IndexPage: React.VFC = () => {
         isSensorUse={isSensorUse}
         setIsSensorUse={setIsSensorUse}
       />
-    </>
+    </MobileSensorContextProvider>
   );
 };
 
-const Wrapper = styled.div`
+const ListStyleWrapper = styled.div`
   padding: 16px;
 
   & > article:not(:first-child) {
