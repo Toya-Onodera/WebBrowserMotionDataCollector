@@ -9,18 +9,29 @@ export const useMobileSensorDataLists = (
     acceleration,
     accelerationIncludingGravity,
     rotationRate,
+    platform,
   } = useMemo(() => {
     return mobileSensorContext;
   }, [mobileSensorContext]);
 
   const deviceUseLists = useMemo(() => {
+    if (platform) {
+      const { name, version, product, os } = platform;
+      return [
+        `ブラウザ名: ${name}`,
+        `ブラウザバージョン: ${version}`,
+        `端末名: ${product}`,
+        `端末OS名: ${os}`,
+      ];
+    }
+
     return [
       "ブラウザ名: platform.name",
       "ブラウザバージョン: platform.version",
       "端末名: platform.product",
       "端末OS名: platform.os.family",
     ];
-  }, []);
+  }, [platform]);
 
   const deviceorientationLists = useMemo(() => {
     if (orientation) {

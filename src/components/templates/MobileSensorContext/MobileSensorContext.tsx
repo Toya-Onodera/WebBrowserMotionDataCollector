@@ -1,6 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 
+// ua-parser-js
+import { UAParser } from "ua-parser-js";
+
 // DeviceOrientationEvent だと余計なプロパティも取り扱ってしまう
 export type Orientation = {
   absolute: boolean;
@@ -13,11 +16,19 @@ export type Acceleration = DeviceMotionEventAcceleration | null;
 export type AccelerationIncludingGravity = DeviceMotionEventAcceleration | null;
 export type RotationRate = DeviceMotionEventRotationRate | null;
 
+export type Platform = {
+  name: string | undefined;
+  version: string | undefined;
+  product: string | undefined;
+  os: string | undefined;
+} | null;
+
 export type MobileSensorContextValue = {
   orientation: Orientation;
   acceleration: Acceleration;
   accelerationIncludingGravity: AccelerationIncludingGravity;
   rotationRate: RotationRate;
+  platform: Platform;
 };
 
 export const MobileSensorContext = createContext<MobileSensorContextValue>(
@@ -50,6 +61,7 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
   const [accelerationIncludingGravity, setAccelerationIncludingGravity] =
     useState<AccelerationIncludingGravity>(null);
   const [rotationRate, setRotationRate] = useState<RotationRate>(null);
+  const [platform, setPlatform] = useState<Platform>(null);
 
   useEffect(() => {
     const orientationHandler = ({
@@ -95,6 +107,15 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
 
     window.addEventListener("devicemotion", motionHandler);
     window.addEventListener("deviceorientation", orientationHandler);
+
+    // userAgentの取得
+    const parsedUA = UAParser();
+    setPlatform({
+      name: parsedUA.browser.name,
+      version: parsedUA.browser.version,
+      product: parsedUA.device.model,
+      os: `${parsedUA.os.name} ${parsedUA.os.version}`,
+    });
   }, []);
 
   return (
@@ -104,6 +125,7 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
         acceleration: acceleration,
         accelerationIncludingGravity: accelerationIncludingGravity,
         rotationRate: rotationRate,
+        platform: platform,
       }}
     >
       {children}
