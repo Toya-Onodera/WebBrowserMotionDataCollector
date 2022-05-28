@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -72,9 +73,11 @@ export const useMotionSensorFloatingButton = (
   const [mobileSensors, setMobileSensors] = useState<MobileSensorCollectData>(
     SENSOR_INITIALIZE_VALUE,
   );
-  const platform = mobileContext.platform;
-
   const [isTimerStart, setIsTimerStart] = useState<boolean>(false);
+
+  const platform = useMemo(() => {
+    return mobileContext.platform;
+  }, [mobileContext.platform]);
 
   const setIsClickedFalseOnClick = useCallback(async () => {
     if (window.confirm("センサデータの収集を終了しますか？")) {
