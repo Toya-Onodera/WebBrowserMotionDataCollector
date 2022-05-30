@@ -1,6 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 
+// ua-parser-js
+import { UAParser } from "ua-parser-js";
+
 // DeviceOrientationEvent だと余計なプロパティも取り扱ってしまう
 export type Orientation = {
   absolute: boolean;
@@ -13,11 +16,19 @@ export type Acceleration = DeviceMotionEventAcceleration | null;
 export type AccelerationIncludingGravity = DeviceMotionEventAcceleration | null;
 export type RotationRate = DeviceMotionEventRotationRate | null;
 
+export type Platform = {
+  name: string | null;
+  version: string | null;
+  product: string | null;
+  os: string | null;
+} | null;
+
 export type MobileSensorContextValue = {
   orientation: Orientation;
   acceleration: Acceleration;
   accelerationIncludingGravity: AccelerationIncludingGravity;
   rotationRate: RotationRate;
+  platform: Platform;
 };
 
 export const MobileSensorContext = createContext<MobileSensorContextValue>(
@@ -50,6 +61,7 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
   const [accelerationIncludingGravity, setAccelerationIncludingGravity] =
     useState<AccelerationIncludingGravity>(null);
   const [rotationRate, setRotationRate] = useState<RotationRate>(null);
+  const [platform, setPlatform] = useState<Platform>(null);
 
   useEffect(() => {
     const orientationHandler = ({
@@ -95,6 +107,17 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
 
     window.addEventListener("devicemotion", motionHandler);
     window.addEventListener("deviceorientation", orientationHandler);
+
+    // userAgentの取得
+    const parsedUA = UAParser();
+    const os = parsedUA.os;
+
+    setPlatform({
+      name: parsedUA.browser.name ? parsedUA.browser.name : null,
+      version: parsedUA.browser.version ? parsedUA.browser.version : null,
+      product: parsedUA.device.model ? parsedUA.device.model : null,
+      os: os.name && os.version ? `${os.name} ${os.version}` : null,
+    });
   }, []);
 
   return (
@@ -104,6 +127,7 @@ export const MobileSensorContextProvider: React.FC = ({ children }) => {
         acceleration: acceleration,
         accelerationIncludingGravity: accelerationIncludingGravity,
         rotationRate: rotationRate,
+        platform: platform,
       }}
     >
       {children}

@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -16,6 +17,7 @@ import {
   MobileSensorContextValue,
   Orientation,
   RotationRate,
+  Platform,
 } from "../../templates/MobileSensorContext";
 
 // Firebase
@@ -71,8 +73,11 @@ export const useMotionSensorFloatingButton = (
   const [mobileSensors, setMobileSensors] = useState<MobileSensorCollectData>(
     SENSOR_INITIALIZE_VALUE,
   );
-
   const [isTimerStart, setIsTimerStart] = useState<boolean>(false);
+
+  const platform = useMemo(() => {
+    return mobileContext.platform;
+  }, [mobileContext.platform]);
 
   const setIsClickedFalseOnClick = useCallback(async () => {
     if (window.confirm("センサデータの収集を終了しますか？")) {
@@ -80,7 +85,7 @@ export const useMotionSensorFloatingButton = (
 
       try {
         // Firebase にデータを格納する
-        await writeSensorData(mobileSensors);
+        await writeSensorData(mobileSensors, platform);
 
         alert("データを保存しました。");
       } catch (e) {
@@ -95,7 +100,7 @@ export const useMotionSensorFloatingButton = (
         setIsTimerStart(false);
       }
     }
-  }, [mobileSensors, setIsSensorUse]);
+  }, [mobileSensors, setIsSensorUse, platform]);
 
   const setIsClickedTrueOnClick = useCallback(() => {
     if (window.confirm("センサデータの収集を開始しますか？")) {
@@ -143,7 +148,12 @@ export const useMotionSensorFloatingButton = (
 
 const writeSensorData = (
   sensorData: MobileSensorCollectData,
+  platform: Platform,
 ): Promise<void> => {
+  const collectedData = {
+    sensorData: sensorData,
+    platform: platform,
+  };
   const newPostKey = push(child(ref(database), "/spe")).key;
-  return set(ref(database, `/spe/${newPostKey}`), sensorData);
+  return set(ref(database, `/spe/${newPostKey}`), collectedData);
 };

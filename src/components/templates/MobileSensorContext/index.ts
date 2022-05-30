@@ -9,4 +9,5 @@ export type {
   Acceleration,
   AccelerationIncludingGravity,
   RotationRate,
+  Platform,
 } from "./MobileSensorContext";
