@@ -1,0 +1,1 @@
+export { FloatingInfo } from "./FloatingInfo";

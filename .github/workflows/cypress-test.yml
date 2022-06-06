@@ -1,0 +1,72 @@
+name: Cypress Test
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  job_1:
+    name: e2e-with-cypress
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:latest
+      options: --user 1001 # Firefox で動作確認するための設定
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      ##############################
+      # Web Browser Installation
+      ##############################
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@latest
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+
+      - name: Install cypress dependencies
+        run: yarn --frozen-lockfile
+        working-directory: cypress
+
+      ##############################
+      # Google Chrome
+      ##############################
+      - name: E2E with Google Chrome
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          start: yarn start
+          wait-on: "https://localhost:8080"
+          command: yarn cy:run:chrome
+        env:
+          NODE_TLS_REJECT_UNAUTHORIZED: 0
+
+      ##############################
+      # Firefox
+      ##############################
+      - name: E2E with Firefox
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          start: yarn start
+          wait-on: "https://localhost:8080"
+          command: yarn cy:run:firefox
+        env:
+          NODE_TLS_REJECT_UNAUTHORIZED: 0
