@@ -1,6 +1,7 @@
 {
   "name": "web-browser-motion-data-collector",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@cypress/webpack-preprocessor": "^5.11.1",
