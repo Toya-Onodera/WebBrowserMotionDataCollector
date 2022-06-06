@@ -105,3 +105,6 @@ fabric.properties
 
 # dist
 /dist
+
+#firebase
+.firebase
