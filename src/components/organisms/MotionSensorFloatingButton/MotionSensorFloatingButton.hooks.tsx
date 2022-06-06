@@ -135,7 +135,7 @@ export const useMotionSensorFloatingButton = (
         };
       });
     },
-    isTimerStart ? 1000 : null,
+    isTimerStart ? 10 : null,
     mobileContext,
   );
 
